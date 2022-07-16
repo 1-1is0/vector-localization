@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# first 10 with -20
+# rest 5 with +20
 """Sample program to make Vector move."""
 from math import pi
 from time import sleep
@@ -20,7 +22,15 @@ def print_proximity_call_back(msg):
     rad = msg.angle
     angel = rad * 180 / pi
     print("rad", rad)
-    if round(rad, 3) > 0.087:
+    # 20 degree
+    # 20, 30 , 45, 90
+    # limit = 0.349
+    limit = 90
+    # 90 degree
+    # limit = 90
+
+    limit = limit * pi / 180
+    if -rad > limit:
         move_pub.publish(0.0, 0.0, 0.0, 0.0)
         print("#stop in if")
         print("angle", angel)
@@ -33,12 +43,12 @@ def main():
 
     # head_pub = Publisher("/motors/Head", float, queue_size=1)
 # /motors/head
-    # sub = Subscriber("/pose", Pose, callback=print_proximity_call_back)
+    sub = Subscriber("/pose", Pose, callback=print_proximity_call_back)
 
 
     # Need small delay to setup publishers
     sleep(0.5)
-    v = -20.0
+    v = 20.0
     # 5
     # t = 0.5
     # 10
@@ -47,7 +57,7 @@ def main():
     # t = 1.5
     # 20
     # t = 2
-    t = 3.9
+    t = 5
     print("Executing commands")
     move_pub.publish(v, -v, 0.0, 0.0)
     sleep(t)
