@@ -42,7 +42,7 @@ def main():
     world = World(length=20, width=20, landmarks=landmarks)
 
     particleFilter = ParticleFilter(nParticles, forward_noise_dict[50], turn_noise_dict[90], sensor_noise_dict, world)
-    rospy.init_node("main_localization", anonymous=True)
+    #  rospy.init_node("main_localization", anonymous=True)
     myRobot = Robot(forward_noise_dict[50], turn_noise_dict[90], sensor_noise_dict, world)
 
     # set robot
@@ -57,7 +57,7 @@ def main():
     steps= 100
 
     #  myRobot.rotate(0.5, pi)
-    particleFilter.allParticleDistance()       
+    particleFilter.allParticleDistance()
     # getting timing
     time_end = time.time()
     running_time = time_end - time_start
