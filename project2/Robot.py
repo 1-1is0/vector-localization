@@ -122,8 +122,7 @@ class Robot:
         # for real robot we have: true_turn=turn+np.random.normal(abs(turn-mean),std);mean,std for turn data
         # we have v and true_turn so we calculate the time
         mean,std=self.turn_noise
-        # turn=turn+np.random.normal(abs(turn-mean),std)
-        turn=turn
+        turn=turn+np.random.normal(abs(turn-mean),std)
         print('final turn', turn)
         t_rot = turn / omega
         rospy.sleep(2.03 * t_rot)
